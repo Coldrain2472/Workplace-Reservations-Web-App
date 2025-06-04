@@ -1,0 +1,75 @@
+﻿@model JobsBookingApp.Web.Models.Reservation.HomeReservationListViewModel
+
+@{
+    ViewData["Title"] = "My Reservations";
+}
+
+<h2 class="mb-4">My Reservations</h2>
+
+@if (Model.ActiveReservations.Any())
+{
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <h4>Ongoing Reservations</h4>
+        <span class="text-muted">Total: @Model.ActiveReservations.Count</span>
+    </div>
+
+    <table class="table table-striped table-bordered mb-5">
+        <thead class="table-dark">
+            <tr>
+                <th>Workplace</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model.ActiveReservations.OrderBy(r => r.StartTime))
+            {
+                <tr>
+                    <td>@r.WorkplaceId</td>
+                    <td>@r.StartTime.ToString("g")</td>
+                    <td>@r.EndTime.ToString("g")</td>
+                    <td>@r.CreatedAt.ToString("g")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="text-muted">You have no active reservations.</p>
+}
+
+@if (Model.InactiveReservations.Any())
+{
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <h4>Past Reservations</h4>
+        <span class="text-muted">Total: @Model.InactiveReservations.Count</span>
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>Workplace</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model.InactiveReservations.OrderByDescending(r => r.StartTime))
+            {
+                <tr>
+                    <td>@r.WorkplaceId</td>
+                    <td>@r.StartTime.ToString("g")</td>
+                    <td>@r.EndTime.ToString("g")</td>
+                    <td>@r.CreatedAt.ToString("g")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="text-muted">You have no past reservations.</p>
+}
