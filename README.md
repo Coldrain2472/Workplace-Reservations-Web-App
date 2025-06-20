@@ -1,5 +1,5 @@
 # Workplace Reservations Web Application
-.NET MVC Web App (Mock Internship Exam)
+ASP.NET MVC Web App (Mock Internship Exam)
 
 - Целта на разработката е да се реализира система за резервация на работни места в офис пространството на организация.
 - Потребителите, както и работните места, са предварително зададени в базата данни.
